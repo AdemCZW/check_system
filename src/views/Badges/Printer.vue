@@ -248,7 +248,6 @@ const handlePrint = () => {
     page-break-after: always; /* 每頁印完後換頁 */
   }
 
-  /* 識別證卡片在列印時的精確尺寸和樣式 */
   .badge-card {
     width: 100mm; /* 每個識別證佔據 A4 頁面的一半寬度，留邊 */
     height: 140mm; /* 每個識別證佔據 A4 頁面的一半高度，留邊 */
