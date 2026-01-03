@@ -1,4 +1,4 @@
-import{r,c as u,a as s,d as o,v as i,y as p,o as v}from"./index-D1oj5Jpk.js";import{_ as m}from"./_plugin-vue_export-helper-DlAUqK2U.js";const b={class:"email-editor-view"},c={class:"editor-layout"},k={class:"tech-card config-side"},g={class:"input-block"},f={class:"input-block"},x={class:"status-card"},C={class:"switch"},w={class:"tech-card editor-side"},y={class:"variable-container"},E={class:"tags"},S={__name:"EmailEditor",setup(V){const n=r({subject:"【報名成功通知】感謝您參與本次活動",senderName:"活動小辦公室",content:`親愛的 {name} 您好：
+import{r,c as u,a as s,d as o,v as i,y as p,o as v}from"./index-SPe3T7Jh.js";import{_ as m}from"./plugin-vue-export-helper-DlAUqK2U.js";const b={class:"email-editor-view"},c={class:"editor-layout"},k={class:"tech-card config-side"},g={class:"input-block"},f={class:"input-block"},x={class:"status-card"},C={class:"switch"},w={class:"tech-card editor-side"},y={class:"variable-container"},E={class:"tags"},S={__name:"EmailEditor",setup(V){const n=r({subject:"【報名成功通知】感謝您參與本次活動",senderName:"活動小辦公室",content:`親愛的 {name} 您好：
 
 感謝您報名參加 {event_name}。
 您的專屬報名序號為：{order_id}

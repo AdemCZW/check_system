@@ -3,10 +3,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
     return {
-        // 關鍵修改：必須完全匹配您的 GitHub 倉庫名稱 check_system
-        // 使用 '/' 是為了開發環境，'/check_system/' 是為了 GitHub Pages 生產環境
+        // 確保 base 路徑完全對應 GitHub 倉庫名稱
         base: mode === 'production' ? '/check_system/' : '/',
 
         plugins: [
@@ -22,8 +21,27 @@ export default defineConfig(({ command, mode }) => {
         build: {
             outDir: 'docs', // 輸出到 docs 資料夾
             emptyOutDir: true, // 每次打包先清空舊檔
-            // 建議加入以下設定，防止 GitHub Pages 找不到 _ 開頭的資料夾 (如 _plugin-vue_export-helper)
             assetsDir: 'assets',
+            // 關鍵修正：解決 GitHub Pages 404 底線檔案問題
+            rollupOptions: {
+                output: {
+                    // 將所有以底線開頭的檔案重新命名，移除底線
+                    sanitizeFileName(name) {
+                        // 一些 plugin 回傳的 module id 可能包含 null 字元或特殊字元
+                        //（例如: "\0plugin-vue:export-helper-..."），直接寫入檔案會導致
+                        // Node.js 觸發 Invalid ARG 錯誤。這裡先移除 null 與不允許的字元。
+                        const clean = String(name)
+                            .split(String.fromCharCode(0)).join('') // 移除 null bytes
+                            .replace(new RegExp('[:/\\\\]', 'g'), '-'); // 將冒號與路徑分隔符替換為短横線
+
+                        const match = /^_data(.*)/.exec(clean);
+                        if (match) {
+                            return "data" + match[1];
+                        }
+                        return clean.replace(/^_/, ""); // 移除開頭的底線
+                    },
+                },
+            },
         }
     }
 })
