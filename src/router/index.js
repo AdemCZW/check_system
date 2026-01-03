@@ -1,7 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-    history: createWebHistory(
+    // 關鍵修改：將 createWebHistory 改為 createWebHashHistory
+    // 這能確保在 GitHub Pages 重新整理時不會出錯
+    history: createWebHashHistory(
         import.meta.env.BASE_URL),
     routes: [{
             path: '/',
@@ -18,61 +20,61 @@ const router = createRouter({
             component: () =>
                 import ('../components/layout/MainLayout.vue'),
             children: [{
-                    path: 'registration-setting', // 1. 報名頁面設定
+                    path: 'registration-setting',
                     name: 'RegistrationSetting',
                     component: () =>
                         import ('../views/Registration/Setting.vue')
                 },
                 {
-                    path: 'guests', // 2. 參與貴賓
+                    path: 'guests',
                     name: 'Guests',
                     component: () =>
                         import ('../views/Guests/List.vue')
                 },
                 {
-                    path: 'form-fields', // 3. 報名表欄位
+                    path: 'form-fields',
                     name: 'FormFields',
                     component: () =>
                         import ('../views/Fields/Config.vue')
                 },
                 {
-                    path: 'notifications', // 4. 通知信設定
+                    path: 'notifications',
                     name: 'Notifications',
                     component: () =>
                         import ('../views/Notifications/EmailEditor.vue')
                 },
                 {
-                    path: 'participants', // 5. 參與者資訊 (已從 Dashboard 改為 List)
+                    path: 'participants',
                     name: 'Participants',
                     component: () =>
                         import ('../views/Participants/List.vue')
                 },
                 {
-                    path: 'checkin-history', // 6. 現場報到紀錄 (新增)
+                    path: 'checkin-history',
                     name: 'CheckInHistory',
                     component: () =>
                         import ('../views/CheckIn/History.vue')
                 },
                 {
-                    path: 'badge-printing', // 7. 識別證列印
+                    path: 'badge-printing',
                     name: 'BadgePrinting',
                     component: () =>
                         import ('../views/Badges/Printer.vue')
                 },
                 {
-                    path: 'lottery-winners', // 8. 中獎名單管理 (新增)
+                    path: 'lottery-winners',
                     name: 'LotteryWinners',
                     component: () =>
                         import ('../views/Lottery/Winners.vue')
                 },
                 {
-                    path: 'organizer-info', // 9. 主辦單位資訊
+                    path: 'organizer-info',
                     name: 'OrganizerInfo',
                     component: () =>
                         import ('../views/Organizer/CompanyInfo.vue')
                 },
                 {
-                    path: 'ai-service', // 10. AI客服設定
+                    path: 'ai-service',
                     name: 'AIService',
                     component: () =>
                         import ('../views/AI-Service/BotSetting.vue')
