@@ -1,8 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-    // 關鍵修改：將 createWebHistory 改為 createWebHashHistory
-    // 這能確保在 GitHub Pages 重新整理時不會出錯
     history: createWebHashHistory(
         import.meta.env.BASE_URL),
     routes: [{
@@ -25,12 +23,20 @@ const router = createRouter({
                     component: () =>
                         import ('../views/Registration/Setting.vue')
                 },
+                // --- 修改這裡：指向您的劃位管理頁面 ---
+                {
+                    path: 'seating-plan',
+                    name: 'SeatingPlan',
+                    component: () =>
+                        import ('../views/Guests/SeatManager.vue') // 假設檔名為 SeatManager.vue
+                },
                 {
                     path: 'guests',
                     name: 'Guests',
                     component: () =>
                         import ('../views/Guests/List.vue')
                 },
+                // ----------------------------------
                 {
                     path: 'form-fields',
                     name: 'FormFields',

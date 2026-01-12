@@ -5,23 +5,24 @@ import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 
-// 依據文件規範定義的八大功能模組
+// 依據功能邏輯重新整理的選單 (加入座次管理)
 const menuItems = [
   // --- 報名與活動設定 ---
   { id: 1, name: '報名頁面設定', path: '/admin/registration-setting', icon: '📝' },
   { id: 2, name: '參與貴賓', path: '/admin/guests', icon: '👤' },
-  { id: 3, name: '報名表欄位', path: '/admin/form-fields', icon: '📋' },
-  { id: 4, name: '通知信設定', path: '/admin/notifications', icon: '✉️' },
+  { id: 3, name: '座次劃位管理', path: '/admin/seating-plan', icon: '🪑' }, // 新增選項
+  { id: 4, name: '報名表欄位', path: '/admin/form-fields', icon: '📋' },
+  { id: 5, name: '通知信設定', path: '/admin/notifications', icon: '✉️' },
 
   // --- 名單與現場管理 ---
-  { id: 5, name: '參與者資訊', path: '/admin/participants', icon: '👥' },
-  { id: 6, name: '現場報到紀錄', path: '/admin/checkin-history', icon: '✅' }, // 新增頁面
-  { id: 7, name: '識別證列印', path: '/admin/badge-printing', icon: '🖨️' },
+  { id: 6, name: '參與者資訊', path: '/admin/participants', icon: '👥' },
+  { id: 7, name: '現場報到紀錄', path: '/admin/checkin-history', icon: '✅' },
+  { id: 8, name: '識別證列印', path: '/admin/badge-printing', icon: '🖨️' },
 
   // --- 互動與其他設定 ---
-  { id: 8, name: '中獎名單管理', path: '/admin/lottery-winners', icon: '🎁' }, // 新增頁面
-  { id: 9, name: '主辦單位資訊', path: '/admin/organizer-info', icon: '🏢' },
-  { id: 10, name: 'AI客服設定', path: '/admin/ai-service', icon: '🤖' }
+  { id: 9, name: '中獎名單管理', path: '/admin/lottery-winners', icon: '🎁' },
+  { id: 10, name: '主辦單位資訊', path: '/admin/organizer-info', icon: '🏢' },
+  { id: 11, name: 'AI客服設定', path: '/admin/ai-service', icon: '🤖' }
 ];
 
 const navigateTo = (path) => {
@@ -46,6 +47,7 @@ const navigateTo = (path) => {
           @click="navigateTo(item.path)"
         >
           <span class="index">{{ item.id }}.</span>
+          <span class="icon-span">{{ item.icon }}</span>
           <span class="label">{{ item.name }}</span>
         </div>
       </nav>
@@ -58,7 +60,7 @@ const navigateTo = (path) => {
     <main class="content-area">
       <header class="content-header">
         <div class="breadcrumb">
-          {{ menuItems.find(m => m.path === route.path)?.name || '控制台' }}
+          {{ menuItems.find(m => route.path.startsWith(m.path))?.name || '控制台' }}
         </div>
       </header>
 
@@ -74,6 +76,7 @@ const navigateTo = (path) => {
 </template>
 
 <style lang="scss" scoped>
+/* 這裡保留您原本精美的 CSS 樣式，僅微調 icon 顯示 */
 .admin-layout {
   display: flex;
   height: 100vh;
@@ -95,14 +98,12 @@ const navigateTo = (path) => {
     display: flex;
     align-items: center;
     gap: 12px;
-
     .logo-box {
       width: 32px;
       height: 32px;
       background: var(--accent-blue);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     }
-
     .system-name {
       font-size: 1.1rem;
       letter-spacing: 2px;
@@ -115,22 +116,34 @@ const navigateTo = (path) => {
 .menu {
   flex: 1;
   padding: 0 12px;
+  overflow-y: auto; // 防止選單過長
 
   .menu-item {
-    padding: 14px 20px;
+    padding: 14px 16px;
     margin-bottom: 4px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     color: var(--text-muted);
-    transition: var(--transition-smooth);
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
 
     .index {
       font-family: 'Monaco', monospace;
-      margin-right: 12px;
-      font-size: 0.85rem;
-      opacity: 0.7;
+      margin-right: 8px;
+      font-size: 0.8rem;
+      opacity: 0.5;
+      width: 20px;
+    }
+
+    .icon-span {
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    .label {
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
     }
 
     &:hover {
@@ -139,9 +152,10 @@ const navigateTo = (path) => {
     }
 
     &.active {
-      background: rgba(56, 189, 248, 0.08);
+      background: rgba(56, 189, 248, 0.1);
       color: var(--accent-blue);
-      border-left: 3px solid var(--accent-blue);
+      box-shadow: inset 3px 0 0 var(--accent-blue);
+      font-weight: 500;
     }
   }
 }
@@ -149,7 +163,6 @@ const navigateTo = (path) => {
 .sidebar-footer {
   padding: 20px;
   border-top: 1px solid var(--border-color);
-
   .logout-btn {
     width: 100%;
     padding: 10px;
@@ -159,8 +172,6 @@ const navigateTo = (path) => {
     cursor: pointer;
     font-size: 0.8rem;
     letter-spacing: 2px;
-    transition: var(--transition-smooth);
-
     &:hover {
       border-color: #f87171;
       color: #f87171;
@@ -183,12 +194,10 @@ const navigateTo = (path) => {
   align-items: center;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
-
   .breadcrumb {
     color: var(--text-muted);
     font-size: 0.9rem;
     letter-spacing: 1px;
-    font-weight: 300;
   }
 }
 
