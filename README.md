@@ -1,44 +1,19 @@
-# event-registration-system
+【專案功能詳細說明：活動管理系統】
+本專案為一套全方位活動管理解決方案，涵蓋從「前期報名」、「現場管理」到「後端自動化通知」的全流程。
 
-This template should help get you started developing with Vue 3 in Vite.
+一、 報名與活動配置 (Registration & Setup)
+📝 報名頁面與欄位自定義： 透過前端介面動態設定報名表單（Form Fields），資料即時存儲於後端資料庫。
 
-## Recommended IDE Setup
+🪑 座次劃位管理： 視覺化處理活動座次安排，並與參與者資料進行關聯對應。
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+✉️ 通知信自動化系統： 整合 Django 與第三方郵件 API。支援自定義通知信模板，當參與者完成報名後，系統自動觸發發信邏輯。
 
-## Recommended Browser Setup
+二、 參與者與現場管理 (Attendance Management)
+👥 貴賓與參與者資訊： 提供完整的 CRUD 介面管理參與者清單，支援大量資料的檢索與篩選。
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+✅ 實時報到與識別證列印： 現場報到紀錄同步更新至資料庫，並提供即時的識別證（Badge）列印接口。
 
-## Customize configuration
+三、 互動與進階服務 (Interactive Services)
+🎁 中獎名單管理： 內建抽獎邏輯與中獎者資料維護系統。
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+🤖 AI 客服整合： 預留 AI 客服接口配置，提升參與者互動體驗與自動化諮詢回覆。
